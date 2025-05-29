@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+    {% block title %}
+        Test Page
+    {% endblock %}
+    {% block body %}
+        <ul style="padding: 1%;" id="nav-bar" class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'problem_log' %}">
+                    Problem Log
+                </a>
+            </li>
+        </ul>
+        <h1 style="text-align: center; margin-top: 11%; font-size: 100px;">ThinkDev</h1>
+        <p style="text-align: center;">Because you should always think, before you dev.</p>
+    {% endblock %}

@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+    {% block body %}
+        <div style="display: grid; justify-content: center; align-items: center; margin-top: 2%;">
+            <h4 style="margin-bottom: 15px;">Title of Problem</h4>
+            <input style="width: 500px;" id="title_of_problem" type="text" autofocus>
+        </div>
+        <div style="display: grid; justify-content: center; align-items: center; margin-top: 2%;">
+            <h4 style="margin-bottom: 15px;">Description of Problem</h4>
+            <textarea  placeholder="Brief description of problem." style="resize: none; width: 500px; height: 65px;" id="problem_description"></textarea>
+        </div>
+        <div style="display: grid; justify-content: center; align-items: center; margin-top: 2%;">
+            <h4 style="margin-bottom: 15px;">Problem Summary</h4>
+            <textarea  placeholder="Step-by-step summary of problem." style="resize: none; width: 500px; height: 250px;" id="problem_summary"></textarea>
+        </div>
+        <div style="display: grid; justify-content: center; align-items: center; margin-top: 2%;">
+            <h4 style="margin-bottom: 15px;">Pseudocode</h4>
+            <textarea  placeholder="Start writing Pseudocode!" style="resize: none; width: 500px; height: 250px;" id="pseudocode"></textarea>
+        </div>
+        <div style="display: grid; justify-content: center; align-items: center; margin-top: 2%;">
+            <h4 style="margin-bottom: 15px;">Source Code</h4>
+            <textarea  placeholder="Start writing source code!" style="resize: none; width: 500px; height: 250px;" id="sourcecode"></textarea>
+        </div>
+        <div style="display: flex; justify-content: center; align-items: center; margin-top: 2%; margin-bottom: 2%;">
+            <input style="border-radius: 5px; background-color: #d9b99b; color: white; border: 2px solid #d9b99b;" type="submit" value="Save Problem">
+            <input style="border-radius: 5px; background-color:#a3b899; color: white; border: 2px solid #a3b899; margin-left: 5px;" type="submit" value="Solved Problem!">
+            <a style="margin-left: 5px;" href="{% url 'index' %}">Home</a>
+        </div>
+    {% endblock %}
