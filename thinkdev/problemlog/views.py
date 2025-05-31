@@ -8,3 +8,12 @@ def index(request):
 
 def problem_log(request):
     return render(request, "problemlog.html")
+
+def log(request):
+    return render(request, "log.html")
+
+def register(request):
+    return render(request, "register.html")
+
+def login(request):
+    return render(request, "login.html")

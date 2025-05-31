@@ -1,12 +1,16 @@
 {% extends "layout.html" %}
+{% load static %}
     {% block title %}
         Test Page
     {% endblock %}
     {% block body %}
-        <ul style="padding: 1%;" id="nav-bar" class="nav justify-content-center">
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'problem_log' %}">
-                    Problem Log
+        <ul style="padding: 1%; display: grid; justify-content: center; list-style-type: none;" id="nav-bar">
+            <li>
+                <a style="text-decoration: none; color: black; margin-right: 20px;" href="{% url 'login' %}">
+                    Log In
+                </a>
+                <a style="text-decoration: none; color: black; margin-right: 20px;" href="{% url 'register' %}">
+                    Register
                 </a>
             </li>
         </ul>
