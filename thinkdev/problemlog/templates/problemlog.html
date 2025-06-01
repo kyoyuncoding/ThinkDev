@@ -1,50 +1,47 @@
 {% extends "layout.html" %}
-{% load static %}
-    {% block body %}
-    <table>
-        <tr>
-            <td>
-                <div style="height: 1225px; width: 200px; display: grid;justify-content: left; background-color:black">
-                    <ul style="list-style-type: none; margin-top: 22px;">
-                        <li >
-                            <a style="color: white; text-decoration: none;" href="{% url 'index' %}">Home</a>
-                        </li>
-                        <li>
-                            <a style="color: white; text-decoration: none;" href="{% url 'log' %}">Log</a>
-                        </li>
-                        <li >
-                            <a style="color: white; text-decoration: none;" href="{% url 'index' %}">Log Out</a>
-                        </li>
 
-                    </ul>
-                </div>
-            </td>
-            <td style= "padding-left: 25px;">
-                <div class="problem_element">
-                    <h4 style="margin-bottom: 15px;">Title of Problem</h4>
-                    <input style="width: 750px;" id="title_of_problem" type="text" autofocus>
-                </div>
-                <div class="problem_element">
-                    <h4 style="margin-bottom: 15px;">Description of Problem</h4>
-                    <textarea  placeholder="Brief description of problem." style="resize: none; width: 750px; height: 65px;" id="problem_description"></textarea>
-                </div>
-                <div class="problem_element">
-                    <h4 style="margin-bottom: 15px;">Problem Summary</h4>
-                    <textarea  placeholder="Step-by-step summary of problem." style="resize: none; width: 750px; height: 250px;" id="problem_summary"></textarea>
-                </div>
-                <div class="problem_element">
-                    <h4 style="margin-bottom: 15px;">Pseudocode</h4>
-                    <textarea  placeholder="Start writing Pseudocode!" style="resize: none; width: 750px; height: 250px;" id="pseudocode"></textarea>
-                </div>
-                <div class="problem_element">
-                    <h4 style="margin-bottom: 15px;">Source Code</h4>
-                    <textarea  placeholder="Start writing source code!" style="resize: none; width: 750px; height: 250px;" id="sourcecode"></textarea>
-                </div>
-                <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px; margin-bottom: 2%;">
-                    <input style="border-radius: 5px; background-color: black; color: white; border: 2px solid black;" type="submit" value="Save Problem">
-                    <input style="border-radius: 5px; background-color:black; color: white; border: 2px solid black; margin-left: 5px;" type="submit" value="Solved Problem!">
-                </div>
-            </td>
-        </tr>
-    </table>
-    {% endblock %}
+{% load static %}
+
+{% block title %}
+    Problem Log
+{% endblock %}
+
+{% block body %}
+    <div class="sidebar_pages">
+        <div class="sidebar">
+            <ul style="list-style-type: none; margin-top: 20px">
+                <li >
+                    <a class="sidebar_links" href="{% url 'index' %}">Home</a>
+                </li>
+                <li>
+                    <a class="sidebar_links" href="{% url 'log' %}">Log</a>
+                </li>
+                <li >
+                    <a class="sidebar_links" href="{% url 'index' %}">Log Out</a>
+                </li>
+            </ul>
+        </div>
+        <div class="sidebar_page_second_col">
+
+            <h4 style="margin-bottom: 15px;">Title of Problem</h4>
+            <input style="width: 750px; margin-bottom: 15px;" id="title_of_problem" type="text" autofocus>
+
+            <h4 style="margin-bottom: 15px;">Description of Problem</h4>
+            <textarea  placeholder="Brief description of problem." style="resize: none; width: 750px; margin-bottom: 15px; height: 65px;" id="problem_description"></textarea>
+
+            <h4 style="margin-bottom: 15px;">Problem Summary</h4>
+            <textarea  placeholder="Step-by-step summary of problem." style="resize: none; width: 750px; margin-bottom: 15px; height: 250px;" id="problem_summary"></textarea>
+
+            <h4 style="margin-bottom: 15px;">Pseudocode</h4>
+            <textarea  placeholder="Start writing Pseudocode!" style="resize: none; width: 750px; margin-bottom: 15px; height: 250px;" id="pseudocode"></textarea>
+
+            <h4 style="margin-bottom: 15px;">Source Code</h4>
+            <textarea  placeholder="Start writing source code!" style="resize: none; width: 750px; margin-bottom: 15px; height: 250px;" id="sourcecode"></textarea>
+
+            <div style="display: flex; justify-content: left; align-items: center; margin-top: 15px; margin-bottom: 2%;">
+                <input style="border-radius: 5px; background-color: black; color: white; border: 2px solid black;" type="submit" value="Save Problem">
+                <input style="border-radius: 5px; background-color:black; color: white; border: 2px solid black; margin-left: 5px;" type="submit" value="Solved Problem!">
+            </div>
+        </div>
+    </div>  
+{% endblock %}
