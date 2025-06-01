@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+
+{% load static %}
+
+{% block title %}
+    Log
+{% endblock %}
+
+{% block body %}
+    <div class="sidebar_pages">
+        <div class="sidebar">
+            <ul style="list-style-type: none; margin-top: 20px">
+                <li >
+                    <a class="sidebar_links" href="{% url 'index' %}">Home</a>
+                </li>
+                <li>
+                    <a class="sidebar_links" href="{% url 'problem_log' %}">Problem Log</a>
+                </li>
+                <li >
+                    <a class="sidebar_links" href="{% url 'index' %}">Log Out</a>
+                </li>
+            </ul>
+        </div>
+        <div class="sidebar_page_second_col">
+            <h4>Previously Saved Problems:</h4>
+        </div>
+    </div>  
+{% endblock %}
