@@ -9,39 +9,44 @@
 {% block body %}
     <div class="sidebar_pages">
         <div class="sidebar">
-            <ul style="list-style-type: none; margin-top: 20px">
+            <ul style="list-style-type: none; margin-top: 18px">
+                <li>
+                    <h4 style="color: white;">ThinkDev.</h4>
+                </li>
                 <li >
                     <a class="sidebar_links" href="{% url 'index' %}">Home</a>
                 </li>
                 <li>
                     <a class="sidebar_links" href="{% url 'log' %}">Log</a>
                 </li>
-                <li >
+                <li style="margin-top: 77.5vh;">
                     <a class="sidebar_links" href="{% url 'index' %}">Log Out</a>
                 </li>
             </ul>
         </div>
         <div class="sidebar_page_second_col">
+            <form action="{% url 'log' %}" method="POST">
+                {% csrf_token %}
+                <h4 style="margin-bottom: 15px;">Title of Problem</h4>
+                <input style="width: 750px; margin-bottom: 15px; border-radius: 5px;" id="title_of_problem" name="title_of_problem" type="text" autofocus>
 
-            <h4 style="margin-bottom: 15px;">Title of Problem</h4>
-            <input style="width: 750px; margin-bottom: 15px;" id="title_of_problem" type="text" autofocus>
+                <h4 style="margin-bottom: 15px;">Description of Problem</h4>
+                <textarea  placeholder="Brief description of problem." style="field-sizing: content; resize: none; min-width: 750px; max-width: 750px; margin-bottom: 15px; border-radius: 5px;" id="problem_description" name="problem_description"></textarea>
 
-            <h4 style="margin-bottom: 15px;">Description of Problem</h4>
-            <textarea  placeholder="Brief description of problem." style="resize: none; width: 750px; margin-bottom: 15px; height: 65px;" id="problem_description"></textarea>
+                <h4 style="margin-bottom: 15px;">Problem Summary</h4>
+                <textarea  placeholder="Step-by-step summary of problem." style="field-sizing: content; resize: none; min-width: 750px; max-width: 750px; margin-bottom: 15px; border-radius: 5px; min-height: 75px;" id="problem_summary" name="problem_summary"></textarea>
 
-            <h4 style="margin-bottom: 15px;">Problem Summary</h4>
-            <textarea  placeholder="Step-by-step summary of problem." style="resize: none; width: 750px; margin-bottom: 15px; height: 250px;" id="problem_summary"></textarea>
+                <h4 style="margin-bottom: 15px;">Pseudocode</h4>
+                <textarea  placeholder="Start writing Pseudocode!" style="field-sizing: content; resize: none; min-width: 750px; max-width: 750px; margin-bottom: 15px; border-radius: 5px; min-height: 75px;" id="pseudocode" name="pseudocode"></textarea>
 
-            <h4 style="margin-bottom: 15px;">Pseudocode</h4>
-            <textarea  placeholder="Start writing Pseudocode!" style="resize: none; width: 750px; margin-bottom: 15px; height: 250px;" id="pseudocode"></textarea>
+                <h4 style="margin-bottom: 15px;">Source Code</h4>
+                <textarea  placeholder="Start writing source code!" style="field-sizing: content; resize: none; min-width: 750px; max-width: 750px; margin-bottom: 15px; border-radius: 5px; min-height: 75px;" id="sourcecode" name="sourcecode"></textarea>
 
-            <h4 style="margin-bottom: 15px;">Source Code</h4>
-            <textarea  placeholder="Start writing source code!" style="resize: none; width: 750px; margin-bottom: 15px; height: 250px;" id="sourcecode"></textarea>
-
-            <div style="display: flex; justify-content: left; align-items: center; margin-top: 15px; margin-bottom: 2%;">
-                <input style="border-radius: 5px; background-color: black; color: white; border: 2px solid black;" type="submit" value="Save Problem">
-                <input style="border-radius: 5px; background-color:black; color: white; border: 2px solid black; margin-left: 5px;" type="submit" value="Solved Problem!">
-            </div>
+                <div style="display: flex; justify-content: left; align-items: center; margin-top: 15px; margin-bottom: 2%;">
+                    <input style="border-radius: 5px; background-color: black; color: white; border: 2px solid black;" name="save_problem_button" type="submit" value="Save Problem">
+                    <input style="border-radius: 5px; background-color:black; color: white; border: 2px solid black; margin-left: 5px;" name="solved_problem_button" type="submit" value="Solved Problem!">
+                </div>
+            </form>
         </div>
     </div>  
 {% endblock %}

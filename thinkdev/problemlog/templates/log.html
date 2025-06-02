@@ -9,20 +9,49 @@
 {% block body %}
     <div class="sidebar_pages">
         <div class="sidebar">
-            <ul style="list-style-type: none; margin-top: 20px">
+            <ul style="list-style-type: none; margin-top: 18px">
+                <li>
+                    <h4 style="color: white;">ThinkDev.</h4>
+                </li>
                 <li >
                     <a class="sidebar_links" href="{% url 'index' %}">Home</a>
                 </li>
                 <li>
                     <a class="sidebar_links" href="{% url 'problem_log' %}">Problem Log</a>
                 </li>
-                <li >
+                <li style="margin-top: 77.5vh;">
                     <a class="sidebar_links" href="{% url 'index' %}">Log Out</a>
                 </li>
             </ul>
         </div>
         <div class="sidebar_page_second_col">
             <h4>Previously Saved Problems:</h4>
+            <table>
+                <tr>
+                    <td style="padding-top: 20px; padding-right: 20px;">
+                        Problem Title
+                    </td>
+                    <td style="padding-top: 20px; padding-right: 20px;">
+                        Submit Time
+                    </td>
+                </tr>
+                {% for problem in problems %}
+                    <tr>
+                        <td>
+                            {{problem.problem_title}}
+                        </td>
+                        <td>
+                            {{problem.submit_time}}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
         </div>
     </div>  
 {% endblock %}
+
+
+<!-- A textarea which allows you to write down certain techniques, features or processes which you 
+ would like to get better at learning. The webapp can then begin to give you suggestions (what to learn etc, 
+ what kinds of problems you should begin to start solving, 
+ based on the problems you have submitted previously). -->
