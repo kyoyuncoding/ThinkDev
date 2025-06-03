@@ -26,26 +26,35 @@
         </div>
         <div class="sidebar_page_second_col">
             <h4>Previously Saved Problems:</h4>
-            <table>
-                <tr>
-                    <td style="padding-top: 20px; padding-right: 20px;">
-                        Problem Title
-                    </td>
-                    <td style="padding-top: 20px; padding-right: 20px;">
-                        Submit Time
-                    </td>
-                </tr>
-                {% for problem in problems %}
+            <form action="{% url 'problem_log' %}" method="POST">
+            {% csrf_token %}
+                <table>
                     <tr>
-                        <td>
-                            {{problem.problem_title}}
+                        <td class="log_table_cell">
+                            <b>Problem Title</b>
                         </td>
-                        <td>
-                            {{problem.submit_time}}
+                        <td class="log_table_cell">
+                            <b>Submit Time</b>
                         </td>
                     </tr>
-                {% endfor %}
-            </table>
+                    {% for problem in problems %}
+                        <tr>
+                            <td name="{{problem.problem_title}}" style="padding-right: 20px;">
+                                {{problem.problem_title}}
+                            </td>
+                            <td style="padding-right: 20px;">
+                                {{problem.submit_time}}
+                            </td>
+                            <td style="padding-right: 20px;">
+                                <input style="border-radius: 5px; background-color:black; color: white; border: 2px solid black;" name="edit_button" type="submit" value="Edit">
+                            </td>
+                            <td style="padding-right: 20px;">
+                                <input style="border-radius: 5px; background-color:black; color: white; border: 2px solid black;" name="delete" type="submit" value="Delete">
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </form>
         </div>
     </div>  
 {% endblock %}

@@ -9,6 +9,11 @@ def index(request):
     return render(request, "index.html")
 
 def problem_log(request):
+
+    if request.method == "POST":
+        if request.POST.get("edit_button"):
+            return render(request, "problemlog.html")
+
     return render(request, "problemlog.html")
 
 def log(request):

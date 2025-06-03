@@ -29,3 +29,10 @@
     margin-left: 35px; 
     margin-top: 20px;
 }
+
+.log_table_cell
+{
+    padding-top: 20px; 
+    padding-right: 20px; 
+    text-align: center;
+}
