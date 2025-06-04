@@ -10,9 +10,13 @@ def index(request):
 
 def problem_log(request):
 
+    # Figure out how to use the id of the edited problem.
     if request.method == "POST":
         if request.POST.get("edit_button"):
-            return render(request, "problemlog.html")
+            entry = Problems.objects.get(id=13)
+            return render(request, "problemlog.html",{
+            "entry": entry
+            })
 
     return render(request, "problemlog.html")
 
