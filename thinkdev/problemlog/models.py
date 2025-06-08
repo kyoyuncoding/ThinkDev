@@ -8,5 +8,6 @@ class Problems(models.Model):
     problem_summary = models.CharField(max_length=10000)
     pseudo_code = models.CharField(max_length=10000)
     source_code = models.CharField(max_length=10000)
+    solved = models.CharField(max_length=50)
     submit_time = models.DateTimeField(auto_now_add=True)
 

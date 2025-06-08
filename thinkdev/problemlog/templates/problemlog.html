@@ -45,9 +45,17 @@
                 <h4 style="margin-bottom: 15px;">Source Code</h4>
                 <textarea  placeholder="Start writing source code!" style="field-sizing: content; resize: none; min-width: 750px; max-width: 750px; margin-bottom: 15px; border-radius: 5px; min-height: 75px;" id="sourcecode" name="sourcecode">{{entry.source_code}}</textarea>
 
-                <div style="display: flex; justify-content: left; align-items: center; margin-top: 15px; margin-bottom: 2%;">
-                    <input style="border-radius: 5px; background-color: black; color: white; border: 2px solid black;" name="save_problem_button" type="submit" value="Save Problem">
-                    <!-- <input style="border-radius: 5px; background-color:black; color: white; border: 2px solid black; margin-left: 5px;" name="solved_problem_button" type="submit" value="Solved Problem!"> -->
+                <div style="display: flex; justify-content: left; align-items: center; margin-top: 10px; margin-bottom: 2%;">
+                    <select style="margin-right: 10px; text-align: center; border-radius: 5px; height: 28px; background-color: black; color: white;" name="solved_dropdown">
+                        {% if entry.solved == "Solved (∩_∩)" %}
+                            <option selected value="Solved (∩_∩)">Solved (∩_∩)</option>
+                            <option value="Unsolved (✿◡‿◡)">Unsolved (✿◡‿◡)</option>
+                        {% else %}
+                            <option value="Solved (∩_∩)">Solved (∩_∩)</option>
+                            <option selected value="Unsolved (✿◡‿◡)">Unsolved (✿◡‿◡)</option>
+                        {% endif %}
+                    </select>
+                    <input style="border-radius: 5px; background-color: black; color: white; border: 2px solid black;" name="save_problem_button" type="submit" value="Save">
                 </div>
             </form>
         </div>
