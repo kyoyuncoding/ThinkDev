@@ -17,15 +17,18 @@
                     <a class="sidebar_links" href="{% url 'index' %}">Home</a>
                 </li>
                 <li>
-                    <a class="sidebar_links" href="{% url 'log' %}">Log</a>
+                    <a class="sidebar_links" href="{% url 'problem_log' %}">New Problem</a>
                 </li>
-                <li style="margin-top: 77.5vh;">
+                <li>
+                    <a class="sidebar_links" href="{% url 'log' %}">Past Problems</a>
+                </li>
+                <li style="margin-top: 75.5vh;">
                     <a class="sidebar_links" href="{% url 'index' %}">Log Out</a>
                 </li>
             </ul>
         </div>
         <div class="sidebar_page_second_col">
-            <form action="{% url 'log' %}" method="POST">
+            <form method="POST">
                 {% csrf_token %}
                 <h4 style="margin-bottom: 15px;">Title of Problem</h4>
                 <input style="width: 750px; margin-bottom: 15px; border-radius: 5px;" id="title_of_problem" name="title_of_problem" type="text" autofocus value="{{entry.problem_title}}">
@@ -44,7 +47,7 @@
 
                 <div style="display: flex; justify-content: left; align-items: center; margin-top: 15px; margin-bottom: 2%;">
                     <input style="border-radius: 5px; background-color: black; color: white; border: 2px solid black;" name="save_problem_button" type="submit" value="Save Problem">
-                    <input style="border-radius: 5px; background-color:black; color: white; border: 2px solid black; margin-left: 5px;" name="solved_problem_button" type="submit" value="Solved Problem!">
+                    <!-- <input style="border-radius: 5px; background-color:black; color: white; border: 2px solid black; margin-left: 5px;" name="solved_problem_button" type="submit" value="Solved Problem!"> -->
                 </div>
             </form>
         </div>

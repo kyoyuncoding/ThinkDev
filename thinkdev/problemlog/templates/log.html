@@ -17,47 +17,54 @@
                     <a class="sidebar_links" href="{% url 'index' %}">Home</a>
                 </li>
                 <li>
-                    <a class="sidebar_links" href="{% url 'problem_log' %}">Problem Log</a>
+                    <a class="sidebar_links" href="{% url 'problem_log' %}">New Problem</a>
                 </li>
-                <li style="margin-top: 77.5vh;">
+                <li>
+                    <a class="sidebar_links" href="{% url 'log' %}">Past Problems</a>
+                </li>
+                <li style="margin-top: 75.5vh;">
                     <a class="sidebar_links" href="{% url 'index' %}">Log Out</a>
                 </li>
             </ul>
         </div>
         <div class="sidebar_page_second_col">
             <h4>Previously Saved Problems:</h4>
-            <form action="{% url 'problem_log' %}" method="POST">
-            {% csrf_token %}
-                <table>
+            <table>
+                <tr>
+                    <td>
+                        
+                    </td>
+                    <td class="log_table_cell">
+                        <b>Problem Title</b>
+                    </td>
+                    <td class="log_table_cell">
+                        <b>Last Edited</b>
+                    </td>
+                </tr>
+                {% for problem in problems %}
                     <tr>
-                        <td class="log_table_cell">
-                            <b>Problem Title</b>
+                        <td style="width: 20px;">
+                            {{forloop.counter}}.
                         </td>
-                        <td class="log_table_cell">
-                            <b>Submit Time</b>
+                        <td name="{{problem.problem_title}}" style="padding-right: 20px;">
+                            {{problem.problem_title}}
                         </td>
-                    </tr>
-                    {% for problem in problems %}
-                        <tr>
-                            <td name="{{problem.problem_title}}" style="padding-right: 20px;">
-                                {{problem.problem_title}}
-                            </td>
-                            <td style="padding-right: 20px;">
-                                {{problem.submit_time}}
-                            </td>
+                        <td style="padding-right: 20px;">
+                            {{problem.submit_time}}
+                        </td>
+
+                        <form action="{% url 'problem_log_edit' id_entry=problem.id %}" method="POST">
+                        {% csrf_token %}
                             <td style="padding-right: 20px;">
                                 <input style="border-radius: 5px; background-color:black; color: white; border: 2px solid black;" name="edit_button" type="submit" value="Edit">
                             </td>
                             <td style="padding-right: 20px;">
-                                <input style="border-radius: 5px; background-color:black; color: white; border: 2px solid black;" name="delete" type="submit" value="Delete">
+                                <input style="border-radius: 5px; background-color:black; color: white; border: 2px solid black;" name="delete_button" type="submit" value="Delete">
                             </td>
-                            <td>
-                                <p style="display: none" name="problem_id">{{ problem.id }}</p>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </table>
-            </form>
+                        </form>
+                    </tr>
+                {% endfor %}
+            </table>
         </div>
     </div>  
 {% endblock %}
