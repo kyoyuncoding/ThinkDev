@@ -1,3 +1,4 @@
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Problems
@@ -7,8 +8,34 @@ from django.urls import reverse
 
 # Create your views here.
 
+def register(request):
+    return render(request, "register.html")
+
+def login(request):
+    if request.method == "POST":
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return HttpResponseRedirect(reverse("problemlog.html"))
+        else:
+            return render(request, "login.html", {
+                "message": "Invalid Log-In Details. Try Again."
+            })
+    return render(request, "login.html")
+
+def logout(request):
+    logout(request)
+    return render(request, "index.html", {
+        "message": "Successfully Logged Out!"
+    })
+
 def index(request):
-    return render(request, "index.html")
+    if not request.user.is_authenticated:
+        return render(request, "index.html")    
+    else:
+        HttpResponseRedirect(reverse("problem_log"))
 
 def problem_log(request):
     if request.method == "POST":
@@ -25,14 +52,8 @@ def log(request):
     problems = Problems.objects.all()
 
     return render(request, "log.html", {
-    "problems": problems 
+        "problems": problems 
     })
-
-def register(request):
-    return render(request, "register.html")
-
-def login(request):
-    return render(request, "login.html")
 
 def problem_log_edit(request, id_entry):
 
@@ -55,12 +76,10 @@ def problem_log_edit(request, id_entry):
         update_entry.save()
         problems = Problems.objects.all()
         return render(request, "log.html",{
-        "problems": problems
+            "problems": problems
         })
 
     entry = Problems.objects.get(id=id_entry)
     return render(request, "problemlog.html",{
-    "entry": entry
+        "entry": entry
     })
-
-

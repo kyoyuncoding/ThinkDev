@@ -8,5 +8,6 @@ urlpatterns = [
     path("problemlog/edit/<int:id_entry>", views.problem_log_edit, name="problem_log_edit"),
     path("register/", views.register, name="register"),
     path("login/", views.login, name="login"),
+    path("logout/", views.logout, name="logout"),
     path("log/", views.log, name="log")
 ]
