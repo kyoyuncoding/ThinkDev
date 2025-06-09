@@ -9,6 +9,7 @@ from django import forms
 from django.urls import reverse
 
 # Create your views here.
+
 def register_user(request):
 
     if request.method == "POST":
