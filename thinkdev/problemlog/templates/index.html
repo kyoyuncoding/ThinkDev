@@ -14,13 +14,13 @@
                 </a>
             </li>
         </ul>
+        {% if message %}
+            <p style="text-align: center; color: green;">{{ message }}</p>
+        {% endif %}
         <h1 id="title" style="text-align: center; margin-top: 11%; font-size: 100px;">ThinkDev.</h1>
         <p id="slogan" style="text-align: center;">Because you should always think, before you dev.</p>
         <br>
         <br>
-        {% if message %}
-            <p style="text-align: center; color: green;">{{ message }}</p>
-        {% endif %}
 
         <!-- <script>
             let idx = 0;

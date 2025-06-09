@@ -11,7 +11,7 @@
         </li>
     </ul>
 
-    <form method="POST" action="{% url 'login' %}">
+    <form method="POST">
     {% csrf_token %}
         <table style="display: grid; justify-content: center; align-items: center; margin-top: 7%">
             <tr>
@@ -21,17 +21,22 @@
             </tr>
             <tr>
                 <td style="padding: 5px;">
-                    <input style="width: 250px; border-radius: 5px;" placeholder="Username" type="text">
+                    <input style="width: 250px; border-radius: 5px;" name="register_username" placeholder="Username" type="text">
+                </td>
+            </tr>
+            <tr>
+                <td style="padding: 5px;">
+                    <input style="width: 250px; border-radius: 5px;" name="register_email" placeholder="Email Address" type="text">
                 </td>
             </tr>
             <tr>
                 <td style="padding: 5px">
-                    <input style="width: 250px; border-radius: 5px;" placeholder="Password" type="password">
+                    <input style="width: 250px; border-radius: 5px;" name="register_password" placeholder="Password" type="password">
                 </td>
             </tr>
             <tr>
                 <td style="padding: 5px">
-                    <input style="width: 250px; border-radius: 5px;" placeholder="Confirm Password" type="password">
+                    <input style="width: 250px; border-radius: 5px;" name="confirm_password" placeholder="Confirm Password" type="password">
                 </td>
             </tr>
             <tr>
@@ -41,6 +46,15 @@
                     </div>
                 </td>
             </tr>
+            {% if message %}
+                <tr>
+                    <td style="text-align: center; padding-top: 10px;">
+                        <div style="color: red;">
+                            {{ message }}
+                        </div>
+                    </td>
+                </tr>
+            {% endif %}
         </table>
     </form>
 {% endblock %}

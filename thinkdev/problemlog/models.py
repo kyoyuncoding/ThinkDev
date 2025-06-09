@@ -3,6 +3,7 @@ from django.db import models
 # Create your models here.
 
 class Problems(models.Model):
+    username = models.CharField(max_length=255)
     problem_title = models.CharField(max_length=10000)
     problem_description = models.CharField(max_length=10000) 
     problem_summary = models.CharField(max_length=10000)
