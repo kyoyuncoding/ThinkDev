@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import Problems
+from .models import Problems, ProblemVersions
 from datetime import datetime
 from django import forms
 from django.urls import reverse
@@ -11,7 +11,6 @@ from django.urls import reverse
 # Create your views here.
 
 def register_user(request):
-
     if request.method == "POST":
         if not request.POST.get("register_username"):
             return render(request, "register.html", {
@@ -29,14 +28,13 @@ def register_user(request):
             return render(request, "register.html", {
                 "message": "Passwords don't match."
             })
-        # fix this, don't let someone with the same username create an account, or someone with the same email address. Change all the objects.get() to objects.filter()
-        elif User.objects.filter(username=request.POST.get("register_username")).values:
+        elif User.objects.filter(username=request.POST.get("register_username")):
             return render(request, "register.html", {
                 "message": "Username already taken."
             })
-        elif User.objects.filter(email=request.POST.get("register_email")).values:
+        elif User.objects.filter(email=request.POST.get("register_email")):
             return render(request, "register.html", {
-                "message": "Email address already has an account associated with it."
+                "message": "Email address already used."
             })
         else:
             username = request.POST.get("register_username")
@@ -47,7 +45,6 @@ def register_user(request):
     return render(request, "register.html")
 
 def login_user(request):
-
     if request.method == "POST":
         username = request.POST.get("username")
         password = request.POST.get("password")
@@ -63,22 +60,19 @@ def login_user(request):
     return render(request, "login.html")
 
 def logout_user(request):
-
     logout(request)
     return render(request, "index.html", {
         "message": "Successfully Logged Out!"
     })
 
 def index(request):
-
     if not request.user.is_authenticated:
         return render(request, "index.html")    
     else:
-        HttpResponseRedirect(reverse("problem_log"))
+        return HttpResponseRedirect(reverse("problem_log"))
 
 @login_required
 def problem_log(request):
-
     if request.method == "POST":
         if request.POST.get("save_problem_button") and request.POST.get("title_of_problem"):
             problem_entry = Problems(username=request.user.username, problem_title = request.POST.get("title_of_problem"), problem_description = request.POST.get("problem_description"), problem_summary = request.POST.get("problem_summary"), pseudo_code = request.POST.get("pseudocode"), source_code = request.POST.get("sourcecode"), solved=request.POST.get("solved_dropdown"), submit_time = datetime.now())
@@ -91,15 +85,13 @@ def problem_log(request):
 
 @login_required
 def log(request):
-
-    problems = Problems.objects.filter(username=request.user.username).values()
+    problems = Problems.objects.filter(username=request.user.username)
     return render(request, "log.html", {
         "problems": problems 
     })
 
 @login_required
 def problem_log_edit(request, id_entry):
-
     if request.POST.get("delete_button"):
         entry = Problems.objects.get(id=id_entry, username=request.user.username)
         entry.delete()
@@ -118,6 +110,10 @@ def problem_log_edit(request, id_entry):
         update_entry.submit_time = datetime.now()
         update_entry.save()
         problems = Problems.objects.all()
+
+        save_version = ProblemVersions(problem_id = Problems.objects.get(id=id_entry), username=request.user.username, problem_title = request.POST.get("title_of_problem"), problem_description = request.POST.get("problem_description"), problem_summary = request.POST.get("problem_summary"), pseudo_code = request.POST.get("pseudocode"), source_code = request.POST.get("sourcecode"), solved=request.POST.get("solved_dropdown"), submit_time = datetime.now())
+        save_version.save()
+
         return render(request, "log.html",{
             "problems": problems
         })
@@ -125,4 +121,11 @@ def problem_log_edit(request, id_entry):
     entry = Problems.objects.get(id=id_entry, username=request.user.username)
     return render(request, "problemlog.html",{
         "entry": entry
+    })
+
+@login_required
+def problem_versions(request, id_entry):
+    versions =  ProblemVersions.objects.filter(problem_id = id_entry, username = request.user.username)
+    return render(request, "versions.html", {
+        "versions": versions
     })

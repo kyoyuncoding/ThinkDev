@@ -25,7 +25,7 @@
             </ul>
         </div>
         <div class="sidebar_page_second_col">
-            <h4>Previously Saved Problems:</h4>
+            <h4>Previously Saved Problems</h4>
             <table>
                 <tr>
                     <td>
@@ -68,6 +68,9 @@
                                 {{problem.solved}}
                             </td>
                         {% endif %}
+                        <td style="padding-left: 20px;">
+                            <a style="text-decoration: none;" href="{% url 'problem_versions' id_entry=problem.id %}">Versions</a>
+                        </td>
                     </tr>
                 {% endfor %}
             </table>
