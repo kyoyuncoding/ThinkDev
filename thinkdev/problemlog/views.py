@@ -115,9 +115,7 @@ def problem_log_edit(request, id_entry):
         problems = Problems.objects.filter(id=id_entry, username=request.user.username)
         save_version = ProblemVersions(problem_id = Problems.objects.get(id=id_entry), username=request.user.username, problem_title = request.POST.get("title_of_problem"), problem_description = request.POST.get("problem_description"), problem_summary = request.POST.get("problem_summary"), pseudo_code = request.POST.get("pseudocode"), source_code = request.POST.get("sourcecode"), solved=request.POST.get("solved_dropdown"), submit_time = datetime.now())
         save_version.save()
-
         return HttpResponseRedirect(reverse("log"))
-
     entry = Problems.objects.get(id=id_entry, username=request.user.username)
     return render(request, "problemlog.html",{
         "entry": entry
