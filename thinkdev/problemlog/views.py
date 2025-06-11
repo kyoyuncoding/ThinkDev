@@ -9,7 +9,6 @@ from django import forms
 from django.urls import reverse
 
 # Create your views here.
-
 def register_user(request):
     if request.method == "POST":
         if not request.POST.get("register_username"):
@@ -101,6 +100,7 @@ def problem_log_edit(request, id_entry):
         entry.delete()
         return HttpResponseRedirect(reverse("log"))
     elif request.POST.get("save_problem_button"):
+
         # ChatGPT taught me how to update pre-existing database entries with Django.
         update_entry = Problems.objects.get(id=id_entry, username=request.user.username)
         update_entry.username = request.user.username
@@ -138,13 +138,17 @@ def versions_view(request, id_entry):
 
     elif request.POST.get("delete_button"):
         version = ProblemVersions.objects.get(id=id_entry)
+
         # Just using .distinct() returns a QuerySet object, not a value.
         problem_id = ProblemVersions.objects.values_list("problem_id", flat=True).first()
         version.delete()
         return HttpResponseRedirect(reverse("problem_versions", args=(problem_id, )))
 
         # TO-DO LIST
-        # You also shouldn't be able to save a problem if it it unchanged from the most previous version.
+        # You shouldn't be able to save a problem if it it unchanged from the most previous version.
+        # The most recent version of the problem should be the most recent problem in the problemversions table, rather than the unique copy of the problem in the problems table.
+        # Version history should have the title of the most recent version of the problem somewhere.
+        # When you click "view" on one of the problem versions, the problem title should be clickable, so that it takes you back to the versions of the problem you clicked on.
 
         #DONE
         # When you first create a problem, it should also be the first version that is created.

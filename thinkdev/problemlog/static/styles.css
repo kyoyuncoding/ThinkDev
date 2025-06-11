@@ -11,6 +11,7 @@
     grid-column: 1; 
     background-color: black; 
     position: sticky; 
+    
     /* ChatGPT gave me the idea to use grid layout rather than using a table for sidebar. It also told me to use position: sticky, top: 0 and set the height to fix the sidebar position */
     top: 0; 
     height: 100vh; 
