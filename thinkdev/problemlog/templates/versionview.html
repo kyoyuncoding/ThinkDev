@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% load static %}
+
+{% block title %}
+    Problem Log
+{% endblock %}
+
+{% block body %}
+    <div class="sidebar_pages">
+        <div class="sidebar">
+            <ul style="list-style-type: none; margin-top: 18px">
+                <li>
+                    <h4 style="color: white;">ThinkDev.</h4>
+                </li>
+                <li>
+                    <a class="sidebar_links" href="{% url 'problem_log' %}">New Problem</a>
+                </li>
+                <li>
+                    <a class="sidebar_links" href="{% url 'log' %}">Past Problems</a>
+                </li>
+                <li style="margin-top: 76.25vh;">
+                    <a class="sidebar_links" href="{% url 'logout' %}">Log Out</a>
+                </li>
+            </ul>
+        </div>
+        <div class="sidebar_page_second_col">
+            <p><i>Problem: </i></p>
+            <p><i>Version: </i></p>
+            <p><i>Save Date: {{entry.submit_time }}</i></p>
+            <p>------------------------------------------</p>
+            <h4 style="margin-bottom: 15px;">Title of Problem</h4>
+            <input readonly disabled="yes" style="width: 750px; margin-bottom: 15px; border-radius: 5px;" id="title_of_problem" name="title_of_problem" type="text" autofocus value="{{entry.problem_title}}">
+
+            <h4 style="margin-bottom: 15px;">Description of Problem</h4>
+            <textarea readonly disabled="yes" placeholder="Brief description of problem." style="field-sizing: content; resize: none; min-width: 750px; max-width: 750px; margin-bottom: 15px; border-radius: 5px;" id="problem_description" name="problem_description">{{entry.problem_description}}</textarea>
+
+            <h4 style="margin-bottom: 15px;">Problem Summary</h4>
+            <textarea readonly disabled="yes" placeholder="Step-by-step summary of problem." style="field-sizing: content; resize: none; min-width: 750px; max-width: 750px; margin-bottom: 15px; border-radius: 5px; min-height: 75px;" id="problem_summary" name="problem_summary">{{entry.problem_summary}}</textarea>
+
+            <h4 style="margin-bottom: 15px;">Pseudocode</h4>
+            <textarea readonly disabled="yes" placeholder="Start writing Pseudocode!" style="field-sizing: content; resize: none; min-width: 750px; max-width: 750px; margin-bottom: 15px; border-radius: 5px; min-height: 75px;" id="pseudocode" name="pseudocode">{{entry.pseudo_code}}</textarea>
+
+            <h4 style="margin-bottom: 15px;">Source Code</h4>
+            <textarea readonly disabled="yes" placeholder="Start writing source code!" style="field-sizing: content; resize: none; min-width: 750px; max-width: 750px; margin-bottom: 15px; border-radius: 5px; min-height: 75px;" id="sourcecode" name="sourcecode">{{entry.source_code}}</textarea>
+            <br>
+        </div>
+    </div>  
+{% endblock %}

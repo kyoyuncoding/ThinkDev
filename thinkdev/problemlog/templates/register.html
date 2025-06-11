@@ -54,6 +54,14 @@
                         </div>
                     </td>
                 </tr>
+            {% elif confirmation_message %}
+                <tr>
+                    <td style="text-align: center; padding-top: 10px;">
+                        <div style="color: green">
+                            {{ confirmation_message }}
+                        </div>
+                    </td>
+                </tr>
             {% endif %}
         </table>
     </form>
