@@ -14,6 +14,7 @@ class Problems(models.Model):
 class ProblemVersions(models.Model):
     problem_id = models.ForeignKey(Problems, on_delete=models.CASCADE)
     username = models.CharField(max_length=255)
+    version_number = models.IntegerField(default=0)
     problem_title = models.CharField(max_length=10000)
     problem_description = models.CharField(max_length=10000) 
     problem_summary = models.CharField(max_length=10000)

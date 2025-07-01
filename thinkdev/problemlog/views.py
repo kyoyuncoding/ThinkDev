@@ -113,7 +113,9 @@ def problem_log_edit(request, id_entry):
         update_entry.submit_time = datetime.now()
         update_entry.save()
         problems = Problems.objects.filter(id=id_entry, username=request.user.username)
-        save_version = ProblemVersions(problem_id = Problems.objects.get(id=id_entry), username=request.user.username, problem_title = request.POST.get("title_of_problem"), problem_description = request.POST.get("problem_description"), problem_summary = request.POST.get("problem_summary"), pseudo_code = request.POST.get("pseudocode"), source_code = request.POST.get("sourcecode"), solved=request.POST.get("solved_dropdown"), submit_time = datetime.now())
+        
+        # Do a query to see if a past row exists with the foriegn key. If not, then automatically give the version_number as 1(or I can just make the default value 1 tbf). If a row exists already, take the largest version number and add 1 to it.
+        save_version = ProblemVersions(problem_id = Problems.objects.get(id=id_entry), username=request.user.username, version_number = , problem_title = request.POST.get("title_of_problem"), problem_description = request.POST.get("problem_description"), problem_summary = request.POST.get("problem_summary"), pseudo_code = request.POST.get("pseudocode"), source_code = request.POST.get("sourcecode"), solved=request.POST.get("solved_dropdown"), submit_time = datetime.now())
         save_version.save()
         return HttpResponseRedirect(reverse("log"))
     entry = Problems.objects.get(id=id_entry, username=request.user.username)
