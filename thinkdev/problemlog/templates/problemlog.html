@@ -53,6 +53,9 @@
                         {% endif %}
                     </select>
                     <input style="border-radius: 5px; background-color: black; color: white; border: 2px solid black;" name="save_problem_button" type="submit" value="Save">
+                    {% if error %}
+                        <span style="color: red; margin-left: 10px;">{{error}}</span>
+                    {% endif %}
                 </div>
             </form>
         </div>
