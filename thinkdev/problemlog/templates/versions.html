@@ -1,61 +1,40 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Past Versions.
+    Versions
 {% endblock %}
 
 {% block body %}
-    <div class="sidebar_pages">
-        <div class="sidebar">
-            <ul style="list-style-type: none; margin-top: 18px">
-                <li>
-                    <h4 style="color: white;">ThinkDev.</h4>
-                </li>
-                <li>
-                    <a class="sidebar_links" href="{% url 'problem_log' %}">New Problem</a>
-                </li>
-                <li>
-                    <a class="sidebar_links" href="{% url 'log' %}">Past Problems</a>
-                </li>
-                <li style="margin-top: 76.25vh;">
-                    <a class="sidebar_links" href="{% url 'logout' %}">Log Out</a>
-                </li>
-            </ul>
-        </div>
-        <div class="sidebar_page_second_col">
-        <h4>Version History</h4>
-        <h6>    </h6>
-        <table>
-            <tr>
-                <td>
-                </td>
-                <td class="log_table_cell">
-                    <b>Version Title</b>
-                </td>
-                <td class="log_table_cell">
-                    <b>Saved</b>
-                </td>
-            </tr>
-            {% for version in versions %}
-            <tr style="text-align: center;">
-                <td style="width: 30px;">
-                    {{forloop.counter}}.
-                </td>
+    <h4>Version History</h4>
+    <table>
+        <tr>
+            <td>
+            </td>
+            <td class="log_table_cell">
+                <b>Version Title</b>
+            </td>
+            <td class="log_table_cell">
+                <b>Saved</b>
+            </td>
+        </tr>
+        {% for version in versions %}
+        <tr style="text-align: center;">
+            <td style="width: 30px;">
+                {{forloop.counter}}.
+            </td>
+            <td style="padding-right: 20px;">
+                {{ version.problem_title }}
+            </td>
+            <td style="padding-right: 20px;">
+                {{ version.submit_time }}
+            </td>
+            <form action="{% url 'versions_view' id_entry=version.id %}" method = "POST">
+            {% csrf_token %}
                 <td style="padding-right: 20px;">
-                    {{ version.problem_title }}
+                    <input style="border-radius: 5px; background-color:black; color: white; border: 2px solid black;" name="view_button" type="submit" value="View">
                 </td>
-                <td style="padding-right: 20px;">
-                    {{ version.submit_time }}
-                </td>
-                <form action="{% url 'versions_view' id_entry=version.id %}" method = "POST">
-                {% csrf_token %}
-                    <td style="padding-right: 20px;">
-                        <input style="border-radius: 5px; background-color:black; color: white; border: 2px solid black;" name="view_button" type="submit" value="View">
-                    </td>
-                </form>
-            </tr>
-            {% endfor %}
-        </table>
-        </div>
-    </div>  
+            </form>
+        </tr>
+        {% endfor %}
+    </table>
 {% endblock %}

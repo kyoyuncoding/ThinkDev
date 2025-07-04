@@ -11,8 +11,26 @@
             <link href="{% static 'styles.css' %}" rel="stylesheet">
             <meta name="viewport" content="width=device-width, initial-scale=1"/>
         </head>
-        <body>
-            {% block body %}
-            {% endblock %}
+        <body class="sidebar_pages">
+            <div class="sidebar">
+                <ul style="list-style-type: none; margin-top: 18px">
+                    <li>
+                        <h4 style="color: white;">ThinkDev.</h4>
+                    </li>
+                    <li>
+                        <a class="sidebar_links" href="{% url 'problem_log' %}">New Problem</a>
+                    </li>
+                    <li>
+                        <a class="sidebar_links" href="{% url 'log' %}">Past Problems</a>
+                    </li>
+                    <li style="margin-top: 76.25vh;">
+                        <a class="sidebar_links" href="{% url 'logout' %}">Log Out</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="sidebar_page_second_col">
+                {% block body %}
+                {% endblock %}
+            </div>
         </body>
     </html>

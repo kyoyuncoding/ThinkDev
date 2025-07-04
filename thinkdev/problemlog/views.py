@@ -84,7 +84,7 @@ def problem_log(request):
         elif not request.POST.get("title_of_problem"):
             return HttpResponse("Ya Need To Enter a Title My Guy")
         return HttpResponseRedirect(reverse("log"))
-    return render(request, "problemlog.html")
+    return render(request, "problem-log.html")
 
 @login_required
 def log(request):
@@ -108,7 +108,7 @@ def problem_log_edit(request, id_entry):
             error = "No edits detected."
             entry = Problems.objects.get(id=id_entry, username=request.user.username)
 
-            return render(request, "problemlog.html",{
+            return render(request, "problem-log.html",{
                 "entry": entry,
                 "error": error
             })
@@ -139,7 +139,7 @@ def problem_log_edit(request, id_entry):
 
     entry = Problems.objects.get(id=id_entry, username=request.user.username)
 
-    return render(request, "problemlog.html",{
+    return render(request, "problem-log.html",{
         "entry": entry
     })
 
@@ -155,15 +155,18 @@ def versions_view(request, id_entry):
     if request.POST.get("view_button"):
         currentTitle = Problems.objects.get(id=ProblemVersions.objects.filter(id=id_entry).values('problem_id_id').first()["problem_id_id"])
         version = ProblemVersions.objects.get(id=id_entry)
-        return render(request, "versionview.html", {
+        return render(request, "version-view.html", {
             "entry": version,
             "currentTitle": currentTitle
         })
 
         # TO-DO LIST
+        # Add a button which asks the user if they are sure that they want to delete a problem.
+        # Add different sessions so that different people can use the webapp at different times.
         # Add more alerts when a new problem is created, when the edit is saved, when the problem is deleted etc.
 
         #DONE
+        # Refactor the pages so that they are a bit more tidy to use.
         # Edit the ProblemVersions model to include the version number of the problem, so that it can be used in the versionview.html file, and the versions_view view.
         # Get rid of the delete functionality on the versions. You can't delete a previous version. You can only view the previous version.
         # When you first create a problem, it should also be the first version that is created.

@@ -1,8 +1,11 @@
-{% extends "layout.html" %}
+{% extends "home-layout.html" %}
+
 {% load static %}
+
     {% block title %}
-        Test Page
+        ThinkDev.
     {% endblock %}
+
     {% block body %}
         <ul style="padding: 1%; display: grid; justify-content: center; list-style-type: none;" id="nav-bar">
             <li>
@@ -21,32 +24,4 @@
         <p id="slogan" style="text-align: center;">Because you should always think, before you dev.</p>
         <br>
         <br>
-
-        <!-- <script>
-            let idx = 0;
-            let timer = 0;
-            let title = "Dev";
-            let text = "Because you should always think, before you dev."
-
-            function textAppear()
-            {
-                if (idx < title.length)
-                {
-                    document.getElementById("title").innerHTML += title[idx];
-                    idx++;    
-                }
-                else
-                {
-                    document.getElementById("slogan").innerHTML += text[idx - 3];
-                    idx++;
-                }
-            }
-
-            for (let i = 0; i < (title.length + text.length); i++)
-            {
-                timer += 40;
-                setTimeout(textAppear, timer);
-            }
-
-        </script> -->
     {% endblock %}
