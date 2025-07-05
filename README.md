@@ -60,6 +60,6 @@ Finally, when a problem is deleted from the "previously saved problems" page, al
 
 5. Text-area widths and heights were a lot bigger, and fixed. I changed this to make the text-areas automatically increase in height when a new line was entered (using the "field-sizing: content;" CSS property), allowing the user to always be able to see all of the entered content at once.
 
-Thank you for reading!
+#### Thank you for reading!
 
-Kyo
+#### Kyo
