@@ -56,6 +56,6 @@ Finally, when a problem is deleted from the "previously saved problems" page, al
 
 3. I originally had a delete button next to each version of the problem. I decided to remove this as it didn't make sense, and caused a few issues. For example, if I deleted the current problem version, it would cause all the other versions to be deleted as well.
 
-4. Originally attempted to use HTML's <table> element to create the black sidebar and content for the main logged in pages, however switched to CSS-grid which was far more appropriate for the use case.
+4. Originally attempted to use HTML's table element to create the black sidebar and content for the main logged in pages, however switched to CSS-grid which was far more appropriate for the use case.
 
 5. Text-area widths and heights were a lot bigger, and fixed. I changed this to make the text-areas automatically increase in height when a new line was entered (using the "field-sizing: content;" CSS property), allowing the user to always be able to see all of the entered content at once.
