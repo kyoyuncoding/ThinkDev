@@ -1,5 +1,5 @@
 # ThinkDev.
-#### Video Demo:  <URL https://youtu.be/np3OrbfEvG4>
+#### Video Demo: <URL https://youtu.be/np3OrbfEvG4>
 #### Description: 
 
 ThinkDev is a structured journal, allowing users to systematically approach programming problems to reach and store effective solutions.
@@ -59,3 +59,7 @@ Finally, when a problem is deleted from the "previously saved problems" page, al
 4. Originally attempted to use HTML's <table> element to create the black sidebar and content for the main logged in pages, however switched to CSS-grid which was far more appropriate for the use case.
 
 5. Text-area widths and heights were a lot bigger, and fixed. I changed this to make the text-areas automatically increase in height when a new line was entered (using the "field-sizing: content;" CSS property), allowing the user to always be able to see all of the entered content at once.
+
+Thank you for reading!
+
+Kyo
