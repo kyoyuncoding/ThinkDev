@@ -131,7 +131,7 @@ def problem_log_edit(request, id_entry):
         else:
             probVersion = latestProblemVersion["version_number"] + 1
 
-        # Do a query to see if a past row exists with the foreign key. If not, then automatically give the version_number as 1(or I can just make the default value 1 tbf). If a row exists already, take the largest version number and add 1 to it.
+        # Do a query to see if a past row exists with the foreign key. If not, then automatically give the version_number as 1 (or I can just make the default value 1 tbf). If a row exists already, take the largest version number and add 1 to it.
         save_version = ProblemVersions(problem_id = Problems.objects.get(id=id_entry), username=request.user.username, version_number = probVersion, problem_title = request.POST.get("title_of_problem"), problem_description = request.POST.get("problem_description"), problem_summary = request.POST.get("problem_summary"), pseudo_code = request.POST.get("pseudocode"), source_code = request.POST.get("sourcecode"), solved=request.POST.get("solved_dropdown"), submit_time = datetime.now())
         save_version.save()
 
@@ -159,23 +159,3 @@ def versions_view(request, id_entry):
             "entry": version,
             "currentTitle": currentTitle
         })
-
-        # TO-DO LIST
-        # Add a button which asks the user if they are sure that they want to delete a problem.
-        # Add different sessions so that different people can use the webapp at different times.
-        # Add more alerts when a new problem is created, when the edit is saved, when the problem is deleted etc.
-
-        #DONE
-        # Refactor the pages so that they are a bit more tidy to use.
-        # Edit the ProblemVersions model to include the version number of the problem, so that it can be used in the versionview.html file, and the versions_view view.
-        # Get rid of the delete functionality on the versions. You can't delete a previous version. You can only view the previous version.
-        # When you first create a problem, it should also be the first version that is created.
-        # When you register an account, it should say that you have successfully registered an account! and take you to the login page, or have a link to take you to the login page.
-        # Fixed the issue where problems from different users were coming up when saving an edit to a pre - existing problem.
-        # Added the ability to view and delete different versions, where the text-areas are greyed out, and there is some metadata about the version of the problem as well.
-        # Version history should have the title of the most recent version of the problem somewhere.
-        # When you click "view" on one of the problem versions, the problem title should be clickable, so that it takes you back to the versions of the problem you clicked on.
-        # You shouldn't be able to save a problem if it is unchanged from the most previous version.
-
-        # IN PROGRESS
-        # The current version should be highlighted, so you know that it is the first version.
