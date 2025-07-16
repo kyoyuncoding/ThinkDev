@@ -10,50 +10,61 @@ from django.urls import reverse
 
 # Create your views here.
 def register_user(request):
+
     if request.method == "POST":
+
         if not request.POST.get("register_username"):
             return render(request, "register.html", {
                 "message": "Enter a username."
             })
+
         elif not request.POST.get("register_email"):
             return render(request, "register.html", {
                 "message": "Enter an email address."
             })
+
         elif not request.POST.get("register_password") or not request.POST.get("confirm_password"):
             return render(request, "register.html", {
                 "message": "Enter password and confirmation."
             })
+
         elif request.POST.get("register_password") != request.POST.get("confirm_password"):
             return render(request, "register.html", {
                 "message": "Passwords don't match."
             })
+
         elif User.objects.filter(username=request.POST.get("register_username")):
             return render(request, "register.html", {
                 "message": "Username already taken."
             })
+
         elif User.objects.filter(email=request.POST.get("register_email")):
             return render(request, "register.html", {
                 "message": "Email address already used."
             })
+
         else:
             username = request.POST.get("register_username")
             email = request.POST.get("register_email")
             password = request.POST.get("register_password")
             new_user = User.objects.create_user(username, email, password)
-
             return render(request, "register.html",{
                 "confirmation_message": "You successfully registered!"
             })
+
     return render(request, "register.html")
 
 def login_user(request):
+
     if request.method == "POST":
         username = request.POST.get("username")
         password = request.POST.get("password")
         user = authenticate(request, username=username, password=password)
+
         if user is not None:
             login(request, user)
             return HttpResponseRedirect(reverse("problem_log"))
+
         else:
             return render(request, "login.html", {
                 "message": "Invalid Log-In Details. Try Again."
@@ -68,22 +79,29 @@ def logout_user(request):
     })
 
 def index(request):
+
     if not request.user.is_authenticated:
-        return render(request, "index.html")    
+        return render(request, "index.html")  
+
     else:
         return HttpResponseRedirect(reverse("problem_log"))
 
 @login_required
 def problem_log(request):
+
     if request.method == "POST":
+
         if request.POST.get("save_problem_button") and request.POST.get("title_of_problem"):
             problem_entry = Problems(username=request.user.username, problem_title = request.POST.get("title_of_problem"), problem_description = request.POST.get("problem_description"), problem_summary = request.POST.get("problem_summary"), pseudo_code = request.POST.get("pseudocode"), source_code = request.POST.get("sourcecode"), solved=request.POST.get("solved_dropdown"), submit_time = datetime.now())
             problem_entry.save()
             save_version = ProblemVersions(problem_id = Problems.objects.get(id=problem_entry.id), username=request.user.username, problem_title = request.POST.get("title_of_problem"), problem_description = request.POST.get("problem_description"), problem_summary = request.POST.get("problem_summary"), pseudo_code = request.POST.get("pseudocode"), source_code = request.POST.get("sourcecode"), solved=request.POST.get("solved_dropdown"), submit_time = datetime.now())
             save_version.save()
+
         elif not request.POST.get("title_of_problem"):
             return HttpResponse("Ya Need To Enter a Title My Guy")
+
         return HttpResponseRedirect(reverse("log"))
+
     return render(request, "problem-log.html")
 
 @login_required
@@ -95,23 +113,23 @@ def log(request):
 
 @login_required
 def problem_log_edit(request, id_entry):
+
     if request.POST.get("delete_button"):
         entry = Problems.objects.get(id=id_entry, username=request.user.username)
         entry.delete()
         return HttpResponseRedirect(reverse("log"))
-    elif request.POST.get("save_problem_button"):
 
-        # ChatGPT taught me how to update pre-existing database entries with Django.
+    elif request.POST.get("save_problem_button"):
         update_entry = Problems.objects.get(id=id_entry, username=request.user.username)
 
         if (update_entry.username == request.user.username and update_entry.problem_title == request.POST.get("title_of_problem") and update_entry.problem_description == request.POST.get("problem_description") and update_entry.problem_summary == request.POST.get("problem_summary") and update_entry.pseudo_code == request.POST.get("pseudocode") and update_entry.source_code == request.POST.get("sourcecode") and update_entry.solved == request.POST.get("solved_dropdown")):
             error = "No edits detected."
             entry = Problems.objects.get(id=id_entry, username=request.user.username)
-
             return render(request, "problem-log.html",{
                 "entry": entry,
                 "error": error
             })
+
         else:
             update_entry.username = request.user.username
             update_entry.problem_title = request.POST.get("title_of_problem")
@@ -123,22 +141,19 @@ def problem_log_edit(request, id_entry):
             update_entry.submit_time = datetime.now()
             update_entry.save()
         
-        # Figure out why when there is a new problem being created, it isn't causing "latestProblemVersion" to equal "None".
         latestProblemVersion = ProblemVersions.objects.filter(problem_id=id_entry).order_by('-submit_time').values('version_number').first()
 
         if (latestProblemVersion == None):
             probVersion == 1
+            
         else:
             probVersion = latestProblemVersion["version_number"] + 1
 
-        # Do a query to see if a past row exists with the foreign key. If not, then automatically give the version_number as 1 (or I can just make the default value 1 tbf). If a row exists already, take the largest version number and add 1 to it.
         save_version = ProblemVersions(problem_id = Problems.objects.get(id=id_entry), username=request.user.username, version_number = probVersion, problem_title = request.POST.get("title_of_problem"), problem_description = request.POST.get("problem_description"), problem_summary = request.POST.get("problem_summary"), pseudo_code = request.POST.get("pseudocode"), source_code = request.POST.get("sourcecode"), solved=request.POST.get("solved_dropdown"), submit_time = datetime.now())
         save_version.save()
-
         return HttpResponseRedirect(reverse("log"))
 
     entry = Problems.objects.get(id=id_entry, username=request.user.username)
-
     return render(request, "problem-log.html",{
         "entry": entry
     })
@@ -152,6 +167,7 @@ def problem_versions(request, id_entry):
 
 @login_required
 def versions_view(request, id_entry):
+
     if request.POST.get("view_button"):
         currentTitle = Problems.objects.get(id=ProblemVersions.objects.filter(id=id_entry).values('problem_id_id').first()["problem_id_id"])
         version = ProblemVersions.objects.get(id=id_entry)
