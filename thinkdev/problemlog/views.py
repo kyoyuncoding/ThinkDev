@@ -11,6 +11,8 @@ from django.urls import reverse
 # Create your views here.
 def register_user(request):
 
+    # Conditional logic to determine whether or not a register attempt was valid. For example, if the request method is "POST", and there isn't a
+    # value in the "register_username" element, then the function returns an error message, which is "Enter a username."
     if request.method == "POST":
 
         if not request.POST.get("register_username"):
@@ -43,6 +45,8 @@ def register_user(request):
                 "message": "Email address already used."
             })
 
+    # If all the checks are passed, then there are a series of variables which are initalized, to store the login details, and a new user
+    # variable is initialized, which uses the User model to create a user.
         else:
             username = request.POST.get("register_username")
             email = request.POST.get("register_email")
@@ -56,6 +60,8 @@ def register_user(request):
 
 def login_user(request):
 
+    # This function allows users to login. It takes the request method from the HTML element and uses the authenticate function to login 
+    # the user.
     if request.method == "POST":
         username = request.POST.get("username")
         password = request.POST.get("password")
@@ -73,6 +79,8 @@ def login_user(request):
     return render(request, "login.html")
 
 def logout_user(request):
+
+    # This function allows users to logout, via the "logout()" function.
     logout(request)
     return render(request, "index.html", {
         "message": "Successfully Logged Out!"
@@ -80,6 +88,7 @@ def logout_user(request):
 
 def index(request):
 
+    # This function takes you back to the homepage if the user is not authenticated.
     if not request.user.is_authenticated:
         return render(request, "index.html")  
 
@@ -89,6 +98,8 @@ def index(request):
 @login_required
 def problem_log(request):
 
+    # When the 'save problem' button is clicked on the Problem Log page, and the title of the problem is not empty, then 
+    # a new entry is created in the Problems model, which populates all the columns with the text areas.
     if request.method == "POST":
 
         if request.POST.get("save_problem_button") and request.POST.get("title_of_problem"):
@@ -106,6 +117,9 @@ def problem_log(request):
 
 @login_required
 def log(request):
+
+    # This function filters the Problems model, returning a QuerySet of all the problems which match the username of the requestee. 
+    # These problems then get passed to the log.html file, and rendered.
     problems = Problems.objects.filter(username=request.user.username)
     return render(request, "log.html", {
         "problems": problems 
@@ -114,11 +128,15 @@ def log(request):
 @login_required
 def problem_log_edit(request, id_entry):
 
+    # If the "delete button" is pressed, a new variable is first initialized with the id of the problem, and then the variable is deleted.
     if request.POST.get("delete_button"):
         entry = Problems.objects.get(id=id_entry, username=request.user.username)
         entry.delete()
         return HttpResponseRedirect(reverse("log"))
 
+    # If the save problem button is pressed, a new variable is initalized with the results of the QuerySet, and it first checks whether or not
+    # any edits have been made (if there haven't been any edits, then it returns an error message.) Otherwise, it just updates the problem 
+    # in the previously saved problems log, and saves a new version to the ProblemVersions model.
     elif request.POST.get("save_problem_button"):
         update_entry = Problems.objects.get(id=id_entry, username=request.user.username)
 
@@ -145,7 +163,7 @@ def problem_log_edit(request, id_entry):
 
         if (latestProblemVersion == None):
             probVersion == 1
-            
+
         else:
             probVersion = latestProblemVersion["version_number"] + 1
 
@@ -160,6 +178,8 @@ def problem_log_edit(request, id_entry):
 
 @login_required
 def problem_versions(request, id_entry):
+
+    # This function basically returns all of the versions of the problem. The query is based on the problem id, and the username.
     versions =  ProblemVersions.objects.filter(problem_id = id_entry, username = request.user.username)
     return render(request, "versions.html", {
         "versions": versions
@@ -168,6 +188,7 @@ def problem_versions(request, id_entry):
 @login_required
 def versions_view(request, id_entry):
 
+    # If the view button is pressed, then the currentTitle() variable is initialized, which finds the version of the problem and renders it.
     if request.POST.get("view_button"):
         currentTitle = Problems.objects.get(id=ProblemVersions.objects.filter(id=id_entry).values('problem_id_id').first()["problem_id_id"])
         version = ProblemVersions.objects.get(id=id_entry)
