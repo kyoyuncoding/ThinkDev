@@ -109,7 +109,7 @@ def problem_log(request):
             save_version.save()
 
         elif not request.POST.get("title_of_problem"):
-            return HttpResponse("Ya Need To Enter a Title My Guy")
+            return HttpResponse("Enter a title.")
 
         return HttpResponseRedirect(reverse("log"))
 
