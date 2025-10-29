@@ -1,0 +1,56 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*$py.class
+
+# --- Virtual Environments ---
+venv/
+env/
+.venv/
+ENV/
+
+# --- SQLite database ---
+*.sqlite3
+
+# --- Django-specific ---
+# Local settings or secret keys
+*.log
+*.pot
+*.py~ 
+*.mo
+db.sqlite3
+local_settings.py
+.env
+.env.*
+
+# --- IDE / Editor files ---
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# --- OS-specific files ---
+.DS_Store
+Thumbs.db
+
+# --- Migrations cache (optional) ---
+*/migrations/__pycache__/
+
+# --- Coverage / testing ---
+htmlcov/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+
+# --- Build / distribution ---
+build/
+dist/
+*.egg-info/
+*.egg
