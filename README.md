@@ -1,5 +1,5 @@
 # ThinkDev.
-#### Video Demo: <URL https://youtu.be/np3OrbfEvG4>
+#### Video Demo: <URL https://www.youtube.com/watch?v=Faxf1cHATKQ&t=1s>
 #### Description: 
 
 ThinkDev is a structured journal, allowing users to systematically approach programming problems to reach and store effective solutions.
