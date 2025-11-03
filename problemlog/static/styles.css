@@ -1,0 +1,37 @@
+.sidebar_pages 
+{
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 225px 1fr;
+}
+
+.sidebar 
+{
+    grid-column: 1;
+    background-color: black;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 225px;
+}
+
+.sidebar_links 
+{
+    color: white;
+    text-decoration: none;
+}
+
+.sidebar_page_second_col 
+{
+    grid-column: 2;
+    margin-left: 35px;
+    margin-top: 20px;
+}
+
+.log_table_cell 
+{
+    padding-top: 20px;
+    padding-right: 20px;
+    text-align: center;
+}

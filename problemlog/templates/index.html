@@ -1,0 +1,27 @@
+{% extends "home-layout.html" %}
+
+{% load static %}
+
+{% block title %}
+ThinkDev.
+{% endblock %}
+
+{% block body %}
+<ul style="padding: 2.5%; display: grid; justify-content: center; list-style-type: none;" id="nav-bar">
+    <li>
+        <a style="text-decoration: none; color: black; margin-right: 20px;" href="{% url 'login' %}">
+            Log In
+        </a>
+        <a style="text-decoration: none; color: black; margin-right: 20px;" href="{% url 'register' %}">
+            Register
+        </a>
+    </li>
+</ul>
+{% if message %}
+<p style="text-align: center; color: green;">{{ message }}</p>
+{% endif %}
+<h1 id="title" style="text-align: center; margin-top: 10%; font-size: 100px;">ThinkDev.</h1>
+<p id="slogan" style="text-align: center;">Because you should always think, before you dev.</p>
+<br>
+<br>
+{% endblock %}

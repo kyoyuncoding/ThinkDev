@@ -1,0 +1,79 @@
+{% extends 'home-layout.html' %}
+
+{% block title %}
+Register
+{% endblock %}
+
+{% block body %}
+<ul style="padding: 2.5%; display: grid; justify-content: center; list-style-type: none;" id="nav-bar">
+    <li>
+        <a style="text-decoration: none; color: black; margin-right: 20px;" href="{% url 'login' %}">
+            Log In
+        </a>
+        <a style="text-decoration: none; color: black; margin-right: 20px;" href="{% url 'index' %}">
+            Home
+        </a>
+    </li>
+</ul>
+
+<form method="POST">
+    {% csrf_token %}
+    <table style="display: grid; justify-content: center; align-items: center; margin-top: 5.5%">
+        <tr>
+            <th colspan="2">
+                <h1 style="display: grid; justify-content: center; align-items: center; margin-bottom: 35px;">Register
+                </h1>
+            </th>
+        </tr>
+        <tr>
+            <td style="padding: 5px;">
+                <input style="width: 250px; border-radius: 5px;" name="register_username" placeholder="Username"
+                    type="text">
+            </td>
+        </tr>
+        <tr>
+            <td style="padding: 5px;">
+                <input style="width: 250px; border-radius: 5px;" name="register_email" placeholder="Email Address"
+                    type="text">
+            </td>
+        </tr>
+        <tr>
+            <td style="padding: 5px">
+                <input style="width: 250px; border-radius: 5px;" name="register_password" placeholder="Password"
+                    type="password">
+            </td>
+        </tr>
+        <tr>
+            <td style="padding: 5px">
+                <input style="width: 250px; border-radius: 5px;" name="confirm_password" placeholder="Confirm Password"
+                    type="password">
+            </td>
+        </tr>
+        <tr>
+            <td style="padding-top: 20px;" colspan="2">
+                <div style="display: flex; justify-content: center; align-items: center;">
+                    <input style="border-radius: 5px; background-color: black; color: white; border: 2px solid black;"
+                        type="submit" value="Register">
+                </div>
+            </td>
+        </tr>
+        {% if message %}
+        <tr>
+            <td style="text-align: center; padding-top: 10px;">
+                <div style="color: red;">
+                    {{ message }}
+                </div>
+            </td>
+        </tr>
+        {% elif confirmation_message %}
+        <tr>
+            <td style="text-align: center; padding-top: 10px;">
+                <div style="color: green">
+                    {{ confirmation_message }}
+                </div>
+            </td>
+        </tr>
+        {% endif %}
+    </table>
+</form>
+{% endblock %}

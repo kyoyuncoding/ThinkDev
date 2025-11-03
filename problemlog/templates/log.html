@@ -1,0 +1,60 @@
+{% extends 'layout.html' %}
+
+{% load static %}
+
+{% block title %}
+    Log
+{% endblock %}
+
+{% block body %}
+<h4>Previously Saved Problems</h4>
+<table>
+    <tr>
+        <td>
+        </td>
+        <td class="log_table_cell">
+            <b>Problem Title</b>
+        </td>
+        <td class="log_table_cell">
+            <b>Last Edited</b>
+        </td>
+    </tr>
+    {% for problem in problems %}
+    <tr style="text-align: center;">
+        <td style="width: 30px;">
+            {{forloop.counter}}.
+        </td>
+        <td name="{{problem.problem_title}}" style="padding-right: 20px;">
+            {{problem.problem_title}}
+        </td>
+        <td style="padding-right: 20px;">
+            {{problem.submit_time}}
+        </td>
+
+        <form action="{% url 'problem_log_edit' id_entry=problem.id %}" method="POST">
+            {% csrf_token %}
+            <td style="padding-right: 20px;">
+                <input style="border-radius: 5px; background-color:black; color: white; border: 2px solid black;"
+                    name="edit_button" type="submit" value="Edit">
+            </td>
+            <td style="padding-right: 20px;">
+                <input style="border-radius: 5px; background-color:black; color: white; border: 2px solid black;"
+                    name="delete_button" type="submit" value="Delete">
+            </td>
+        </form>
+        {% if problem.solved == "Solved (∩_∩)" %}
+        <td style="color: green;">
+            {{problem.solved}}
+        </td>
+        {% else %}
+        <td style="color: red;">
+            {{problem.solved}}
+        </td>
+        {% endif %}
+        <td style="padding-left: 20px;">
+            <a style="text-decoration: none;" href="{% url 'problem_versions' id_entry=problem.id %}">Versions</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% load static %}
+
+{% block title %}
+Problem Log
+{% endblock %}
+
+{% block body %}
+<p><i>Problem: <a style="text-decoration: none"
+            href="{% url 'problem_versions' id_entry=entry.problem_id_id %}">{{currentTitle.problem_title}}</a></i></p>
+<p><i>Version: {{entry.version_number}}</i></p>
+<p><i>Save Date: {{entry.submit_time }}</i></p>
+<p>------------------------------------------</p>
+<h4 style="margin-bottom: 15px;">Title of Problem</h4>
+<input readonly disabled="yes" style="width: 750px; margin-bottom: 15px; border-radius: 5px;" id="title_of_problem"
+    name="title_of_problem" type="text" autofocus value="{{entry.problem_title}}">
+
+<h4 style="margin-bottom: 15px;">Description of Problem</h4>
+<textarea readonly disabled="yes" placeholder="Brief description of problem."
+    style="field-sizing: content; resize: none; min-width: 750px; max-width: 750px; margin-bottom: 15px; border-radius: 5px;"
+    id="problem_description" name="problem_description">{{entry.problem_description}}</textarea>
+
+<h4 style="margin-bottom: 15px;">Problem Summary</h4>
+<textarea readonly disabled="yes" placeholder="Step-by-step summary of problem."
+    style="field-sizing: content; resize: none; min-width: 750px; max-width: 750px; margin-bottom: 15px; border-radius: 5px; min-height: 75px;"
+    id="problem_summary" name="problem_summary">{{entry.problem_summary}}</textarea>
+
+<h4 style="margin-bottom: 15px;">Pseudocode</h4>
+<textarea readonly disabled="yes" placeholder="Start writing Pseudocode!"
+    style="field-sizing: content; resize: none; min-width: 750px; max-width: 750px; margin-bottom: 15px; border-radius: 5px; min-height: 75px;"
+    id="pseudocode" name="pseudocode">{{entry.pseudo_code}}</textarea>
+
+<h4 style="margin-bottom: 15px;">Source Code</h4>
+<textarea readonly disabled="yes" placeholder="Start writing source code!"
+    style="field-sizing: content; resize: none; min-width: 750px; max-width: 750px; margin-bottom: 15px; border-radius: 5px; min-height: 75px;"
+    id="sourcecode" name="sourcecode">{{entry.source_code}}</textarea>
+<br>
+<select
+    style="margin-right: 10px; text-align: center; border-radius: 5px; height: 28px; background-color: black; color: white;"
+    name="solved_dropdown">
+    {% if entry.solved == "Solved (∩_∩)" %}
+    <option disabled selected value="Solved (∩_∩)">Solved (∩_∩)</option>
+    <option disabled value="Unsolved (✿◡‿◡)">Unsolved (✿◡‿◡)</option>
+    {% else %}
+    <option disabled value="Solved (∩_∩)">Solved (∩_∩)</option>
+    <option disabled selected value="Unsolved (✿◡‿◡)">Unsolved (✿◡‿◡)</option>
+    {% endif %}
+</select>
+<br>
+<br>    
+{% endblock %}

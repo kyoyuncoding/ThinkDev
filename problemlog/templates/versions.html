@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Versions
+{% endblock %}
+
+{% block body %}
+<h4>Version History</h4>
+<table>
+    <tr>
+        <td>
+        </td>
+        <td class="log_table_cell">
+            <b>Version Title</b>
+        </td>
+        <td class="log_table_cell">
+            <b>Saved</b>
+        </td>
+    </tr>
+    {% for version in versions %}
+    <tr style="text-align: center;">
+        <td style="width: 30px;">
+            {{forloop.counter}}.
+        </td>
+        <td style="padding-right: 20px;">
+            {{ version.problem_title }}
+        </td>
+        <td style="padding-right: 20px;">
+            {{ version.submit_time }}
+        </td>
+        <form action="{% url 'versions_view' id_entry=version.id %}" method="POST">
+            {% csrf_token %}
+            <td style="padding-right: 20px;">
+                <input style="border-radius: 5px; background-color:black; color: white; border: 2px solid black;"
+                    name="view_button" type="submit" value="View">
+            </td>
+        </form>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

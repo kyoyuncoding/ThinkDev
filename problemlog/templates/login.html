@@ -1,0 +1,55 @@
+{% extends 'home-layout.html' %}
+
+{% block title %}
+Login
+{% endblock %}
+
+{% block body %}
+<ul style="padding: 2.5%; display: grid; justify-content: center; list-style-type: none;" id="nav-bar">
+    <li>
+        <a style="text-decoration: none; color: black; margin-right: 20px;" href="{% url 'register' %}">
+            Register
+        </a>
+        <a style="text-decoration: none; color: black; margin-right: 20px;" href="{% url 'index' %}">
+            Home
+        </a>
+    </li>
+</ul>
+
+<form method="POST">
+    {% csrf_token %}
+    <table style="display: grid; justify-content: center; align-items: center; margin-top: 7%">
+        <tr>
+            <th colspan="2">
+                <h1 style="display: grid; justify-content: center; align-items: center; margin-bottom: 35px;">Login</h1>
+            </th>
+        </tr>
+        <tr>
+            <td style="padding: 5px;">
+                <input style="width: 250px; border-radius: 5px;" name="username" placeholder="Username" type="text">
+            </td>
+        </tr>
+        <tr>
+            <td style="padding: 5px;">
+                <input style="width: 250px; border-radius: 5px;" name="password" placeholder="Password" type="password">
+            </td>
+        </tr>
+        <tr>
+            <td style="padding-top: 15px;" colspan="2">
+                <div style="display: flex; justify-content: center; align-items: center;">
+                    <input style="border-radius: 5px; background-color: black; color: white; border: 2px solid black;"
+                        type="submit" value="Login">
+                </div>
+            </td>
+        </tr>
+        {% if message %}
+        <tr>
+            <td style="text-align: center; padding-top: 10px;">
+                <div style="color: red;">
+                    {{ message }}
+                </div>
+            </td>
+        </tr>
+        {% endif %}
+</form>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <link href="{% static 'styles.css' %}" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+
+<body class="sidebar_pages">
+    <div class="sidebar">
+        <ul style="list-style-type: none; margin-top: 18px">
+            <li>
+                <h4 style="color: white;">ThinkDev.</h4>
+            </li>
+            <li>
+                <a class="sidebar_links" href="{% url 'problem_log' %}">New Problem</a>
+            </li>
+            <li>
+                <a class="sidebar_links" href="{% url 'log' %}">Past Problems</a>
+            </li>
+            <li style="margin-top: 80.25vh;">
+                <a class="sidebar_links" href="{% url 'logout' %}">Log Out</a>
+            </li>
+        </ul>
+    </div>
+    <div class="sidebar_page_second_col">
+        {% block body %}
+        {% endblock %}
+    </div>
+</body>
+</html>
