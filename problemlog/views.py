@@ -105,7 +105,7 @@ def problem_log(request):
         if request.POST.get("save_problem_button") and request.POST.get("title_of_problem"):
             problem_entry = Problems(username=request.user.username, problem_title = request.POST.get("title_of_problem"), problem_description = request.POST.get("problem_description"), problem_summary = request.POST.get("problem_summary"), pseudo_code = request.POST.get("pseudocode"), source_code = request.POST.get("sourcecode"), solved=request.POST.get("solved_dropdown"), submit_time = datetime.now())
             problem_entry.save()
-            save_version = ProblemVersions(problem_id = Problems.objects.get(id=problem_entry.id), username=request.user.username, problem_title = request.POST.get("title_of_problem"), problem_description = request.POST.get("problem_description"), problem_summary = request.POST.get("problem_summary"), pseudo_code = request.POST.get("pseudocode"), source_code = request.POST.get("sourcecode"), solved=request.POST.get("solved_dropdown"), submit_time = datetime.now())
+            save_version = ProblemVersions(problem_id = problem_entry.id, username=request.user.username, problem_title = request.POST.get("title_of_problem"), problem_description = request.POST.get("problem_description"), problem_summary = request.POST.get("problem_summary"), pseudo_code = request.POST.get("pseudocode"), source_code = request.POST.get("sourcecode"), solved=request.POST.get("solved_dropdown"), submit_time = datetime.now())
             save_version.save()
 
         elif not request.POST.get("title_of_problem"):
@@ -167,7 +167,7 @@ def problem_log_edit(request, id_entry):
         else:
             probVersion = latestProblemVersion["version_number"] + 1
 
-        save_version = ProblemVersions(problem_id = Problems.objects.get(id=id_entry), username=request.user.username, version_number = probVersion, problem_title = request.POST.get("title_of_problem"), problem_description = request.POST.get("problem_description"), problem_summary = request.POST.get("problem_summary"), pseudo_code = request.POST.get("pseudocode"), source_code = request.POST.get("sourcecode"), solved=request.POST.get("solved_dropdown"), submit_time = datetime.now())
+        save_version = ProblemVersions(problem_id = id_entry, username=request.user.username, version_number = probVersion, problem_title = request.POST.get("title_of_problem"), problem_description = request.POST.get("problem_description"), problem_summary = request.POST.get("problem_summary"), pseudo_code = request.POST.get("pseudocode"), source_code = request.POST.get("sourcecode"), solved=request.POST.get("solved_dropdown"), submit_time = datetime.now())
         save_version.save()
         return HttpResponseRedirect(reverse("log"))
 
@@ -190,7 +190,7 @@ def versions_view(request, id_entry):
 
     # If the view button is pressed, then the currentTitle() variable is initialized, which finds the version of the problem and renders it.
     if request.POST.get("view_button"):
-        currentTitle = Problems.objects.get(id=ProblemVersions.objects.filter(id=id_entry).values('problem_id_id').first()["problem_id_id"])
+        currentTitle = Problems.objects.get(id=ProblemVersions.objects.filter(id=id_entry).values('problem_id').first()["problem_id"])
         version = ProblemVersions.objects.get(id=id_entry)
         return render(request, "version-view.html", {
             "entry": version,

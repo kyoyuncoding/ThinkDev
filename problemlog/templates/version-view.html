@@ -8,7 +8,7 @@ Problem Log
 
 {% block body %}
 <p><i>Problem: <a style="text-decoration: none"
-            href="{% url 'problem_versions' id_entry=entry.problem_id_id %}">{{currentTitle.problem_title}}</a></i></p>
+            href="{% url 'problem_versions' id_entry=entry.problem_id %}">{{currentTitle.problem_title}}</a></i></p>
 <p><i>Version: {{entry.version_number}}</i></p>
 <p><i>Save Date: {{entry.submit_time }}</i></p>
 <p>------------------------------------------</p>

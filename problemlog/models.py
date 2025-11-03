@@ -12,7 +12,7 @@ class Problems(models.Model):
     submit_time = models.DateTimeField(auto_now_add=True)
 
 class ProblemVersions(models.Model):
-    problem_id = models.ForeignKey(Problems, on_delete=models.CASCADE)
+    problem = models.ForeignKey(Problems, on_delete=models.CASCADE)
     username = models.CharField(max_length=255)
     version_number = models.IntegerField(default=1)
     problem_title = models.CharField(max_length=10000)
